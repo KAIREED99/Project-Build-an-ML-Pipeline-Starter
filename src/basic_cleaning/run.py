@@ -58,7 +58,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--input_artifact", 
         type = str,
-        help = "initial artifact to be cleaned,
+        help = "initial artifact to be cleaned",
         required = True
     )
 
@@ -79,7 +79,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--output_description", 
         type = str, 
-        help = " description of the ouput dataset",
+        help = "description of the ouput dataset",
         required = True
     )
 
