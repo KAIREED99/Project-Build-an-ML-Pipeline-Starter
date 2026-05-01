@@ -46,9 +46,11 @@ def go(config: DictConfig):
                     "artifact_name": "sample.csv",
                     "artifact_type": "raw_data",
                     "artifact_description": "Raw file as downloaded"
-                },
-            )
+     },
+ )
 
+            pass
+        
         if "basic_cleaning" in active_steps:
             _ = mlflow.run(
             os.path.join(hydra.utils.get_original_cwd(), "src", "basic_cleaning"),
@@ -62,7 +64,8 @@ def go(config: DictConfig):
                 "min_price": config["etl"]["min_price"],
                 "max_price": config["etl"]["max_price"],
     },
-)
+) 
+            pass
 
         if "data_check" in active_steps:
             ##################
@@ -83,7 +86,16 @@ def go(config: DictConfig):
 
         if "data_split" in active_steps:
             ##################
-            # Implement here #
+            _ = mlflow.run(
+                f"{config['main']['components_repository']}/train_val_test_split",
+                'main',
+                parameters = {
+                "input": "clean_sample.csv:latest",
+                "test_size": config["modeling"]["test_size"],
+                "random_seed": config["modeling"]["random_seed"],
+                "stratify_by": config["modeling"]["stratify_by"],
+    }
+)
             ##################
             pass
 
