@@ -49,7 +49,7 @@ def go(config: DictConfig):
      },
  )
 
-            pass
+           
         
         if "basic_cleaning" in active_steps:
             _ = mlflow.run(
@@ -65,7 +65,7 @@ def go(config: DictConfig):
                 "max_price": config["etl"]["max_price"],
     },
 ) 
-            pass
+       
 
         if "data_check" in active_steps:
             ##################
@@ -82,7 +82,7 @@ def go(config: DictConfig):
      },
 )
             ##################
-            pass
+         
 
         if "data_split" in active_steps:
             ##################
@@ -97,7 +97,7 @@ def go(config: DictConfig):
     }
 )
             ##################
-            pass
+          
 
         if "train_random_forest" in active_steps:
 
@@ -110,8 +110,8 @@ def go(config: DictConfig):
             # step
 
             ##################
-             _ = mlflow.run(
-                 os.path.join(
+            _ = mlflow.run(
+                os.path.join(
                     hydra.utils.get_original_cwd(),
                     "src",
                     "train_random_forest"
@@ -125,11 +125,12 @@ def go(config: DictConfig):
                     "random_seed": config["modeling"]["random_seed"],
                     "val_size": config["modeling"]["val_size"],
                     "stratify_by": config["modeling"]["stratify_by"],
+                    "max_tfidf_features": config["modeling"]["max_tfidf_features"],
         },
     )
             ##################
 
-            pass
+        
 
         if "test_regression_model" in active_steps:
 
